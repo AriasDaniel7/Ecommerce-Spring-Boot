@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class ProductoService implements OperacionesInterface<Producto, Integer> 
     @Override
     public void eliminar(Integer id) {
         repositoryProducto.deleteById(id);
+    }
+
+    @Override
+    public List<Producto> obtenerTodos() {
+        return repositoryProducto.findAll();
     }
 
 }

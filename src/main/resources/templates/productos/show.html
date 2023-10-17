@@ -33,7 +33,9 @@
         <li class="breadcrumb-item active">Ver Productos</li>
       </ol>
 
-      <a class="btn btn-primary" th:href="@{/productos/crear}"> Crear Producto</a>
+      <a class="btn btn-primary" th:href="@{/productos/crear}">
+        Crear Producto</a
+      >
       <h2>Productos</h2>
       <table class="table">
         <thead>
@@ -47,11 +49,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr th:each="producto:${productos}">
+            <td>[[${producto.nombre}]]</td>
+            <td>[[${producto.descripcion}]]</td>
+            <td>[[${producto.cantidad}]]</td>
+            <td>[[${producto.precio}]]</td>
             <td><a class="btn btn-warning" href="">Editar</a></td>
             <td><a class="btn btn-danger" href="">Eliminar</a></td>
           </tr>

@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce.interfaces;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface OperacionesInterface<T, N> {
@@ -10,4 +11,6 @@ public interface OperacionesInterface<T, N> {
     public void actualizar(T miObjeto);
 
     public void eliminar(N id);
+
+    public List<T> obtenerTodos();
 }
