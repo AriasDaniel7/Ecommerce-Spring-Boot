@@ -12,4 +12,9 @@ public class ProductoController {
     public String verProductos() {
         return "productos/show";
     }
+
+    @GetMapping("/crear")
+    public String crearProductos() {
+        return "productos/create";
+    }
 }
