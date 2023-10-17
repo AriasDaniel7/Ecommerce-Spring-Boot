@@ -22,7 +22,7 @@
   </head>
 
   <body>
-    <div th:include="~{administrador/template_admin :: header }"></div>
+    <div th:insert="~{administrador/template_admin :: header }"></div>
     <!-- Page Content -->
     <div class="container">
       <!-- Page Heading/Breadcrumbs -->
@@ -59,7 +59,7 @@
       </table>
     </div>
     <!-- /.container -->
-    <div th:include="~{administrador/template_admin :: footer }"></div>
+    <div th:insert="~{administrador/template_admin :: footer }"></div>
 
     <!-- Bootstrap core JavaScript -->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>

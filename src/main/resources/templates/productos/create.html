@@ -19,10 +19,11 @@
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet" />
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" />
   </head>
 
   <body>
-    <div th:include="~{administrador/template_admin :: header }"></div>
+    <div th:insert="~{administrador/template_admin :: header }"></div>
 
     <!-- Page Content -->
     <div class="container">
@@ -37,7 +38,7 @@
       <h2>Crear Producto</h2>
       <form
         class="form-horizontal"
-        action="#"
+        th:action="@{/productos/guardar}"
         method="post"
         enctype="multipart/form-data"
       >
@@ -62,13 +63,12 @@
           <div class="col-sm-10">
             <textarea
               class="form-control"
-              id="descripcion"
               name="descripcion"
-              placeholder="Ingrese la descripcion del producto"
+              id="descripcion"
               required
+              placeholder="Ingrese la descripcion del producto"
               autocomplete="off"
-            >
-            </textarea>
+            ></textarea>
           </div>
         </div>
 
@@ -121,7 +121,7 @@
     </div>
     <!-- /.container -->
 
-    <div th:include="~{administrador/template_admin :: footer }"></div>
+    <div th:insert="~{administrador/template_admin :: footer }"></div>
 
     <!-- Bootstrap core JavaScript -->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
