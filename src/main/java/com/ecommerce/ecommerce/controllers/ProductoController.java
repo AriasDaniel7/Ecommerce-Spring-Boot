@@ -52,13 +52,7 @@ public class ProductoController {
             String nombreImagen = serviceSubirArchivo.guardarImagen(archivo);
             producto.setImagen(nombreImagen);
         } else {
-            if (archivo.isEmpty()) {// Editamos el producto pero no cambiamos la imagen
-                Producto p = serviceProducto.obtenerPorId(producto.getId()).get();
-                producto.setImagen(p.getImagen());
-            } else {
-                String nombreImagen = serviceSubirArchivo.guardarImagen(archivo);
-                producto.setImagen(nombreImagen);
-            }
+
         }
 
         serviceProducto.guardar(producto);
@@ -73,13 +67,30 @@ public class ProductoController {
     }
 
     @PostMapping("/actualizar")
-    public String actualizar(Producto producto) {
+    public String actualizar(Producto producto, @RequestParam("img") MultipartFile archivo) throws IOException {
+        if (archivo.isEmpty()) {// Editamos el producto pero no cambiamos la imagen
+            Producto p = serviceProducto.obtenerPorId(producto.getId()).get();
+            producto.setImagen(p.getImagen());
+        } else {// Cuando se edita la imagen
+            Producto p = serviceProducto.obtenerPorId(producto.getId()).get();
+            // Eliminar cuando la imagen no sea por defecto
+            if (!p.getImagen().equals("default.jpg")) {
+                serviceSubirArchivo.eliminarImagen(p.getImagen());
+            }
+            String nombreImagen = serviceSubirArchivo.guardarImagen(archivo);
+            producto.setImagen(nombreImagen);
+        }
         serviceProducto.actualizar(producto);
         return "redirect:/productos";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Integer id) {
+        Producto p = serviceProducto.obtenerPorId(id).get();
+        // Eliminar cuando la imagen no sea por defecto
+        if (!p.getImagen().equals("default.jpg")) {
+            serviceSubirArchivo.eliminarImagen(p.getImagen());
+        }
         serviceProducto.eliminar(id);
         return "redirect:/productos";
     }
