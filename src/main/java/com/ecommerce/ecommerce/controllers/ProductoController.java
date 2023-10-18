@@ -2,7 +2,6 @@ package com.ecommerce.ecommerce.controllers;
 
 import java.io.IOException;
 
-import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +27,8 @@ public class ProductoController {
     @Autowired
     private SubirArchivoService serviceSubirArchivo;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
+    // private final Logger LOGGER =
+    // LoggerFactory.getLogger(ProductoController.class);
 
     @GetMapping("")
     public String verProductos(Model model) {
@@ -68,11 +68,11 @@ public class ProductoController {
 
     @PostMapping("/actualizar")
     public String actualizar(Producto producto, @RequestParam("img") MultipartFile archivo) throws IOException {
+        Producto p = serviceProducto.obtenerPorId(producto.getId()).get();
+
         if (archivo.isEmpty()) {// Editamos el producto pero no cambiamos la imagen
-            Producto p = serviceProducto.obtenerPorId(producto.getId()).get();
             producto.setImagen(p.getImagen());
         } else {// Cuando se edita la imagen
-            Producto p = serviceProducto.obtenerPorId(producto.getId()).get();
             // Eliminar cuando la imagen no sea por defecto
             if (!p.getImagen().equals("default.jpg")) {
                 serviceSubirArchivo.eliminarImagen(p.getImagen());
@@ -80,6 +80,7 @@ public class ProductoController {
             String nombreImagen = serviceSubirArchivo.guardarImagen(archivo);
             producto.setImagen(nombreImagen);
         }
+        producto.setUsuario(p.getUsuario());
         serviceProducto.actualizar(producto);
         return "redirect:/productos";
     }
