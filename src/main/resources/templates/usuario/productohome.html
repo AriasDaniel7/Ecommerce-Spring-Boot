@@ -50,10 +50,13 @@
             </div>
             <div class="col-lg-6">
               <form th:action="@{/carrito}" method="POST">
+                <input type="hidden" th:value="${producto.id}" name="id" />
                 <h2 class="card-title">[[${producto.nombre}]]</h2>
 
                 <ul class="list-group">
-                  <li class="list-group-item"><h5>Precio: [[${producto.precio}]]</h5></li>
+                  <li class="list-group-item">
+                    <h5>Precio: [[${producto.precio}]]</h5>
+                  </li>
                   <li class="list-group-item">
                     <p>Descripción: [[${producto.descripcion}]]</p>
                   </li>
