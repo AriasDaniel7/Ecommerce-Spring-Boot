@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-    <head>
+    <title>Spring eCommerce</title>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link
+      th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
 
-        <title>Spring eCommerce</title>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" />
+  </head>
 
+  <body>
+    <!-- Navigation -->
+    <div th:insert="~{usuario/template_usuario :: header }"></div>
 
-        <!-- Bootstrap core CSS -->
-        <link
-            th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
-            rel="stylesheet"
-            />
+    <!-- Page Content -->
+    <div class="container">
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">Spring eCommerce <small>Carrito</small></h1>
 
-        <!-- Custom styles for this template -->
-        <link th:href="@{/css/heroic-features.css}" rel="stylesheet" />
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item active">Carrito</li>
+      </ol>
 
-    </head>
-
-    <body>
-
-        <!-- Navigation -->
-        <div th:insert="~{usuario/template_usuario :: header }"></div>
-
-        <!-- Page Content -->
-        <div class="container">
-
-
-            <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">
-                Spring eCommerce <small>Carrito</small>
-            </h1>
-
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-                <li class="breadcrumb-item active">Carrito</li>
-            </ol>
-
-            <!-- Blog Post -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <table class="table">
-                                <thead>
-                                    <tr >
-                                      <td scope="col">Nombre</td>
-                                      <td scope="col">Precio</td>
-                                      <td scope="col">Cantidad</td>
-                                      <td scope="col">Total</td> 
-                                      <th scope="col">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each= "orden:${carrito}">
-                                      <th>[[${orden.nombre}]]</th>
-                                        <th>[[${orden.precio}]]</th>
-                                        <th>[[${orden.cantidad}]]</th>
-                                        <th>[[${orden.total}]]</th>
-                                        <td><a href="#" class="btn btn-danger">Quitar</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <h2 class="card-title">SUBTOTAL</h2>
-
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Total: [[${orden.total}]]</h5></li>
-                                <a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
+      <!-- Blog Post -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-9">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td scope="col">Nombre</td>
+                    <td scope="col">Precio</td>
+                    <td scope="col">Cantidad</td>
+                    <td scope="col">Total</td>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="orden:${carrito}">
+                    <th>[[${orden.nombre}]]</th>
+                    <th>[[${orden.precio}]]</th>
+                    <th>[[${orden.cantidad}]]</th>
+                    <th>[[${orden.total}]]</th>
+                    <td>
+                      <a
+                        th:href="@{/delete/cart/{id} (id=${orden.producto.id})}"
+                        class="btn btn-danger"
+                        >Quitar</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <!-- /.container -->
 
-            <!-- Footer -->
-            <div th:insert="~{usuario/template_usuario :: footer }"></div>
+            <div class="col-lg-3">
+              <h2 class="card-title">SUBTOTAL</h2>
 
-            <!-- Bootstrap core JavaScript -->
-            <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-            <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <h5>Total: [[${orden.total}]]</h5>
+                </li>
+                <a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
 
-    </body>
+    <!-- Footer -->
+    <div th:insert="~{usuario/template_usuario :: footer }"></div>
 
+    <!-- Bootstrap core JavaScript -->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  </body>
 </html>
